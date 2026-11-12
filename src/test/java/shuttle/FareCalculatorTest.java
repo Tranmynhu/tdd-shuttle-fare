@@ -49,4 +49,10 @@ public class FareCalculatorTest {
         assertThrows(IllegalArgumentException.class,
                 () -> FareCalculator.fareCents(3, "pilot"));
     }
+
+    //Find a bug with a test
+    @Test
+    void partOfAKmIsChargedAsAFullKm() {
+        assertEquals(250, FareCalculator.fareCents(5.5, "adult"));
+    }
 }
