@@ -27,7 +27,9 @@ public class FareCalculator {
         if (!DISCOUNTS.containsKey(rider)) {
             throw new IllegalArgumentException("unknown rider type: " + rider);
         }
-        int extraKm = Math.max(0, (int) (distanceKm - INCLUDED_KM));
+
+//        int extraKm = Math.max(0, (int) (distanceKm - INCLUDED_KM));
+        int extraKm = Math.max(0, (int) Math.ceil(distanceKm - INCLUDED_KM));
         int full = BASE_FARE_CENTS + extraKm * PER_EXTRA_KM_CENTS;
         return (int) Math.round(full * DISCOUNTS.get(rider));
     }
