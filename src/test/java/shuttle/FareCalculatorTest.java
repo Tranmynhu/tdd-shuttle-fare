@@ -58,6 +58,17 @@ public class FareCalculatorTest {
         assertEquals(250, FareCalculator.fareCents(5.5, "adult"));
     }
 
+    //Add a test which will fail (red)
+    @Test
+    void peakHoursAdd100CentSurcharge() {
+        assertEquals(300, FareCalculator.fareCents(3, "adult", true));
+    }
+
+    @Test
+    void studentPaysHalfOfThePeakSurchargeToo() {
+        assertEquals(150, FareCalculator.fareCents(3, "student", true));
+    }
+
     @ParameterizedTest(name = "{0} km, {1} -> {2} cents")
     @CsvSource({
             "0,   adult,   200",
