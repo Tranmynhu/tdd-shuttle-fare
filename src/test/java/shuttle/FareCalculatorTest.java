@@ -2,6 +2,8 @@ package shuttle;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import org.junit.jupiter.api.Test;
 
@@ -54,5 +56,19 @@ public class FareCalculatorTest {
     @Test
     void partOfAKmIsChargedAsAFullKm() {
         assertEquals(250, FareCalculator.fareCents(5.5, "adult"));
+    }
+
+    @ParameterizedTest(name = "{0} km, {1} -> {2} cents")
+    @CsvSource({
+            "0,   adult,   200",
+            "5,   adult,   200",
+            "5.1, adult,   250",
+            "6,   adult,   250",
+            "10,  student, 225",
+            "10,  senior,  225",
+            "100, child,   0"
+    })
+    void fareTable(double distanceKm, String rider, int expected) {
+        assertEquals(expected, FareCalculator.fareCents(distanceKm, rider));
     }
 }
