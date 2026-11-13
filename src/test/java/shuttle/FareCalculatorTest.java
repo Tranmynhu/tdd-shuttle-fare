@@ -61,4 +61,9 @@ public class FareCalculatorTest {
     void peakHoursAdd100CentSurcharge() {
         assertEquals(300, FareCalculator.fareCents(3, "adult", true));
     }
+
+    @Test
+    void studentPaysHalfOfThePeakSurchargeToo() {
+        assertEquals(150, FareCalculator.fareCents(3, "student", true));
+    }
 }
