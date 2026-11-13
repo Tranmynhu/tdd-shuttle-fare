@@ -56,7 +56,7 @@ public class FareCalculatorTest {
         assertEquals(250, FareCalculator.fareCents(5.5, "adult"));
     }
 
-    //Add a fail test (red)
+    //Add a test which will fail (red)
     @Test
     void peakHoursAdd100CentSurcharge() {
         assertEquals(300, FareCalculator.fareCents(3, "adult", true));

@@ -13,24 +13,42 @@ public class FareCalculator {
 
     /**
      * Returns the shuttle fare in cents.
-     *
+     * <p>
      * Rules (the specification):
-     *  - The base fare of 200 cents covers the first 5 km (including exactly 5 km).
-     *  - Each additional km, or part of a km, costs 50 cents.
-     *  - Students and seniors pay half. Children ride free.
-     *  - A negative distance or an unknown rider type throws IllegalArgumentException.
+     * - The base fare of 200 cents covers the first 5 km (including exactly 5 km).
+     * - Each additional km, or part of a km, costs 50 cents.
+     * - Students and seniors pay half. Children ride free.
+     * - A negative distance or an unknown rider type throws IllegalArgumentException.
      */
-    public static int fareCents(double distanceKm, String rider) {
+//    public static int fareCents(double distanceKm, String rider) {
+//        if (distanceKm < 0) {
+//            throw new IllegalArgumentException("distance must be non-negative");
+//        }
+//        if (!DISCOUNTS.containsKey(rider)) {
+//            throw new IllegalArgumentException("unknown rider type: " + rider);
+//        }
+//        int extraKm = Math.max(0, (int) (distanceKm - INCLUDED_KM));
+//        int extraKm = Math.max(0, (int) Math.ceil(distanceKm - INCLUDED_KM));
+//        int full = BASE_FARE_CENTS + extraKm * PER_EXTRA_KM_CENTS;
+//        return (int) Math.round(full * DISCOUNTS.get(rider));
+//    }
+    public static int fareCents(double distanceKm, String rider, boolean peak) {
+        // ... the two checks stay the same ...
         if (distanceKm < 0) {
             throw new IllegalArgumentException("distance must be non-negative");
         }
         if (!DISCOUNTS.containsKey(rider)) {
             throw new IllegalArgumentException("unknown rider type: " + rider);
         }
-
-//        int extraKm = Math.max(0, (int) (distanceKm - INCLUDED_KM));
         int extraKm = Math.max(0, (int) Math.ceil(distanceKm - INCLUDED_KM));
         int full = BASE_FARE_CENTS + extraKm * PER_EXTRA_KM_CENTS;
+        if (peak) {
+            full += 100;
+        }
         return (int) Math.round(full * DISCOUNTS.get(rider));
+    }
+
+    public static int fareCents(double distanceKm, String rider){
+        return fareCents(distanceKm, rider, false);
     }
 }
