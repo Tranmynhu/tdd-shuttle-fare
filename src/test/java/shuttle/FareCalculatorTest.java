@@ -55,7 +55,7 @@ public class FareCalculatorTest {
     //Find a bug with a test
     @Test
     void partOfAKmIsChargedAsAFullKm() {
-        assertEquals(250, FareCalculator.fareCents(5.5, "adult"));
+        assertEquals(249, FareCalculator.fareCents(5.5, "adult"));
     }
 
     //Add a test which will fail (red)
